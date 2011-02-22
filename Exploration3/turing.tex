@@ -20,6 +20,55 @@
 
 \handin{Turing Machine Exploration}{PUT YOUR NAME HERE}{PUT THE DATE HERE}
 
+\section{Baseless Multiplication}
+\paragraph\indent
+A discussion spawned in our collaboration to create a Turing machine to compute decimal multiplication natively. Of course, we spoke of converting decimal to binary, computing, and converting back to decimal. This, in spite of defeating the idea of native computation in decimal sparked the idea of how said conversion would take place. 
+\paragraph \indent We thought of the ways that this conversion is done in hardware with bitshifts, addition, blah blah blah, but this would require a large amount of mathematics which, implementing state by state, would be super complicated. So, we took another route. Converting between bases can be simplified to decrementing the source value in its respective base while incrementing the destination value in its respective base. But wait! Increment and Decrement form $\frac{2}{3}$ of TSL.  Why not perform the entire computation in TSL? Providing a source and destination alphabet, one could create a generic base mathmatical Turing machine.
+
+Now I will describe the Turing machine and its algorithm:\newline
+\subsection{Turing Machine Description}
+$TSL_{Mult}$ is a 7 tape Turing machine\newline
+Tape 1 contains the first operand\newline
+Tape 2 is a "scratch" area for a temp value of Tape 1\newline
+Tape 3 contains the second operand \newline
+Tape 4 is a "scratch" area for a temp value of Tape 3\newline
+Tape 5 contains the source alphabet.\newline
+Tape 6 contains the destination alphabet (May or may not be the same as the source).\newline
+Tape 7 contains the result of the computation.\newline
+
+Now, the algorithm, in pseudocode is as follows.\newline
+
+$while{(operand1)}$ // temporary copy of the operands \newline
+\indent\indent$while{(operand2)}$\newline
+\indent\indent$\{$\newline
+\indent\indent\indent$operand1--; $\newline
+\indent\indent\indent$results++;$\newline
+\indent\indent$\}$\newline\newline
+
+\subsection{Increment}
+The formal, allbeit mechanical, version of incrementation is as follows:
+We will define the least significant figure as the right-most character in a string representing a number. We must also assume that we know the magnitude of one character from the others, allbeit by arbitrary assignment. When the ordered set of characters is exhausted, the current place is returned to the "zero" character, the next most significant location is incremented, and incrementing resumes in the least significant place. 
+
+$$Alphabet\;A\;= \{0,1,2\}$$
+
+$$i_0\;\;\;\;\;\; = 1\;0\;1$$
+$$i++ = 1\;0\;2$$
+$$i++ = 1\;1\;0$$
+$$i++ = 1\;1\;1$$
+
+\subsection{Decrement}
+As you can imagine, decrementing replaces the current symbol with the next lowest in the pecking order. The issue now is when the least significant place reaches the "zero" spot, scan for the next "nonzero" to the left (per our definition or significance). Replace this character with the next lowest character. Now replace all characters (which are all  "zero") with the greatest symbol in the alphabet. Continue decrementing at the least significant place.
+
+$$Alphabet\;A\;= \{0,1,2,3,4\}$$
+
+$$i_0\;\;\;\;\;\; = 1\;0\;3\;0\;1$$
+$$i-- = 1\;0\;3\;0\;0$$
+$$i--= 1\;0\;2\;4\;4$$
+$$i-- = 1\;0\;2\;3\;3$$
+
+\subsection{Wrap It Up}
+\paragraph\indent Not only can this Turing machine natively calculate Binary or Decimal multiplication, it can do any representation to any other representation using the same states and transitions. Ironically, writing code to produce this machine on a modern computer would convert the whole lot to Binary anyway. 
+
 \end{document}
 
 %%% Local Variables: 
