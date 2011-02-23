@@ -38,6 +38,29 @@ Not only is multiplication interesting philosophically, it is also a very useful
 Beside the fact that the principles of multiplication seem to transend time, space, and culture is how useful multiplication really is. Most of the advances and inventions that we so rely upon would not exist without this simple, profound process. Chemistry, physics, engineering, and even textile manufacturing and cooking would be crippled without it. In short, society, civilization, and all that they entail could barely exist without that most excellent of mathematical gems.\\
 The answer to the question posed in this sentence is simple. Why do we multiply? Because we \emph{must}. Because it makes us who we are and holds in it our potential for the future.
 
+\section{Turing Machine Implementation}
+\subsection{Multiplication Method}
+There are many ways to perform multiplication. The simplest method of multiplication is called long multiplication. Long multiplication is performed by multiplying the multiplicand by each digit of the multiplier and then adding the products by the position of the digit in the multiplier. This method was chosen to be implemented in the Turing machine because it is so simple. It also was the first method that was happened upon when searching for methods of multiplication that work with binary.
+\subsection{Multiplication Operation}
+Once the method for performing the multiplication was selected it was important to determine how the method worked when applied to a Turing machine. It was easy to decide that the first and second tape would contain the inputs and the third tape would hold the output. It also made sense that because JFLAP starts the inputs from the left, that the left would be the least significant digit. After these were decided, it became easy to step through the actions the Turing machine should make.\\
+\begin{tabular}{ | c c c  | c c c | c c c | c c c | c c c | c c c c | c c c | }
+\hline
+H & 1 & 1 & 1 & H & 1 & 1 & 1 & H & 1 & H & 1 & H & 1 & 1 & H &  & 1 & 1 & H & 1 & 1 \\
+H & 0 & 1 & H & 0 & 1 & H & 0 & 1 & H & 0 & 1 & H & 0 & 1 &  & H & 0 & 1 & 0 & H & 1 \\
+H & & & 0 & H &  & 0 & 0 & H & 0 & 0 & H & 0 & H & 0 &  & H & 0 & 0 & 0 & H & 0 \\
+\hline
+\end{tabular}\\
+\begin{tabular}{ | c c c | c c c c | c c c c | c c c c | c c c c | c c c c | }
+\hline
+1 & H & 1 & 1 & 1 & H &  & 1 & H & 1 & & H & 1 & 1 &  & H &  & 1 & 1 &  & H & 1 & 1 \\
+0 & H & 1 & 0 & H & 1 &  & 0 & H & 1 & & 0 & H & 1 &  &  & 0 & H & 1 & & 0 & 1 & H \\
+0 & 1 & H & 0 & 1 & 1 & H & 0 & 1 & 1 & H & 0 & 1 & H & 1 & 0 & H & 1 & 1 & 0 & 1 & H & 1 \\
+\hline
+\end{tabular}\\
+An arbitrary decision was made to have the second tape incremented when it is.
+\subsection{JFLAP}
+To create the Turing machine in JFLAP, we started by creating a single state and the transitions for ANDing the first input with the character from the second input and printing it to the third tape. Then, when this worked properly we added a carry state so the result to be printed to the third tape would be added instead of being overwritten. Then it was necessary to add a state for moving the heads back to the left and an accept state.
+
 \section{Baseless Multiplication}
 \paragraph\indent
 A discussion spawned in our collaboration to create a Turing machine to compute decimal multiplication natively. Of course, we spoke of converting decimal to binary, computing, and converting back to decimal. This, in spite of defeating the idea of native computation in decimal sparked the idea of how said conversion would take place. 
